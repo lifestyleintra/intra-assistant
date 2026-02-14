@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MessageCircle, FileText } from "lucide-react";
+import { MessageCircle, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -25,6 +25,12 @@ const Index = () => {
             <Link to="/generate">
               <FileText className="h-5 w-5" />
               Generate a Listing
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="gap-2">
+            <Link to="/compare">
+              <BarChart3 className="h-5 w-5" />
+              Compare Products
             </Link>
           </Button>
         </div>
