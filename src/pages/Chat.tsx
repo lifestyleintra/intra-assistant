@@ -8,6 +8,14 @@ import { useToast } from "@/hooks/use-toast";
 import { streamFromEdge, type Msg } from "@/lib/stream";
 import ReactMarkdown from "react-markdown";
 
+const QUICK_REPLIES = [
+  "What is Intra juice?",
+  "Compare all products",
+  "How do I take FibreLife?",
+  "NutriaPlus ingredients",
+  "CardioLife benefits",
+];
+
 const Chat = () => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -76,9 +84,22 @@ const Chat = () => {
       {/* Messages */}
       <ScrollArea className="flex-1 px-4 py-4">
         {messages.length === 0 && (
-          <p className="mt-12 text-center text-muted-foreground">
-            Ask anything about Intra, NutriaPlus, CardioLife, or FibreLife!
-          </p>
+          <div className="mt-12 space-y-4 text-center">
+            <p className="text-muted-foreground">
+              Ask anything about Intra, NutriaPlus, CardioLife, or FibreLife!
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {QUICK_REPLIES.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => { setInput(q); }}
+                  className="rounded-full border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors hover:bg-muted"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
         <div className="mx-auto max-w-2xl space-y-4">
           {messages.map((m, i) => (
