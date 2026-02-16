@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import lifestylesLogo from "@/assets/lifestyles-logo.png";
 
 const Index = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
       <div className="mx-auto max-w-lg text-center">
+        <img
+          src={lifestylesLogo}
+          alt="Lifestyles logo"
+          className="mx-auto mb-6 h-24 w-24"
+        />
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           Lifestyles Intra
         </h1>
