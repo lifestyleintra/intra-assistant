@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { streamFromEdge, type Msg } from "@/lib/stream";
 import ReactMarkdown from "react-markdown";
+import lifestylesLogo from "@/assets/lifestyles-logo.png";
 
 const QUICK_REPLIES = [
   "What is Intra juice?",
@@ -78,6 +79,7 @@ const Chat = () => {
             <ArrowLeft className="h-5 w-5" />
           </Link>
         </Button>
+        <img src={lifestylesLogo} alt="Lifestyles" className="h-8 w-8" />
         <h1 className="text-lg font-semibold text-foreground">Product Q&A</h1>
       </header>
 
