@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 import lifestylesLogo from "@/assets/lifestyles-logo.png";
 
 const Index = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
+      <div className="absolute right-4 top-4">
+        <ThemeToggle />
+      </div>
       <div className="mx-auto max-w-lg text-center">
         <img
           src={lifestylesLogo}

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const PRODUCTS = [
   {
@@ -51,7 +52,8 @@ const Compare = () => {
             <ArrowLeft className="h-5 w-5" />
           </Link>
         </Button>
-        <h1 className="text-lg font-semibold text-foreground">Compare Products</h1>
+        <h1 className="flex-1 text-lg font-semibold text-foreground">Compare Products</h1>
+        <ThemeToggle />
       </header>
 
       {/* Mobile: stacked cards */}

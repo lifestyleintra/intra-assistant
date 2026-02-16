@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import ThemeToggle from "@/components/ThemeToggle";
 import { streamFromEdge } from "@/lib/stream";
 import ReactMarkdown from "react-markdown";
 
@@ -73,9 +74,10 @@ const Generate = () => {
             <ArrowLeft className="h-5 w-5" />
           </Link>
         </Button>
-        <h1 className="text-lg font-semibold text-foreground">
+        <h1 className="flex-1 text-lg font-semibold text-foreground">
           Listing Generator
         </h1>
+        <ThemeToggle />
       </header>
 
       <div className="mx-auto max-w-2xl space-y-6 px-4 py-6">
