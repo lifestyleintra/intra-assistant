@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   const { pathname } = useLocation();
-  const hidesBubble = pathname === "/chat-widget";
+  const hidesBubble = pathname === "/chat-widget" || pathname === "/chat";
 
   return (
     <>
