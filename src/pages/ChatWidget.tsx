@@ -13,7 +13,11 @@ const QUICK_REPLIES = [
   "How do I take FibreLife?",
 ];
 
-const ChatWidget = () => {
+interface ChatWidgetProps {
+  embedded?: boolean;
+}
+
+const ChatWidget = ({ embedded }: ChatWidgetProps) => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +71,7 @@ const ChatWidget = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-background">
+    <div className={`flex flex-col bg-background ${embedded ? "h-full" : "h-screen"}`}>
       {/* Messages */}
       <ScrollArea className="flex-1 px-2 py-2">
         {messages.length === 0 && (
