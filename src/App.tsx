@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Chat from "./pages/Chat";
 import Generate from "./pages/Generate";
 import Compare from "./pages/Compare";
+import ChatWidget from "./pages/ChatWidget";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/chat" element={<Chat />} />
           <Route path="/generate" element={<Generate />} />
           <Route path="/compare" element={<Compare />} />
+          <Route path="/chat-widget" element={<ChatWidget />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
