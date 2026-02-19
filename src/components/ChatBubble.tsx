@@ -9,7 +9,7 @@ const ChatBubble = () => {
     <>
       {/* Overlay */}
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 flex h-[500px] w-[360px] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:right-6">
+        <div className="fixed bottom-20 right-4 z-50 flex h-[500px] w-[360px] flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:right-6 animate-enter origin-bottom-right">
           <div className="flex items-center justify-between border-b px-3 py-2">
             <span className="text-sm font-semibold text-foreground">Product Q&A</span>
             <button
