@@ -35,7 +35,7 @@ const Chat = () => {
     const text = input.trim();
     if (!text || isLoading) return;
 
-    const userMsg: Msg = { role: "user", content: text };
+    const userMsg: Msg = { role: "user", content: text, timestamp: Date.now() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsLoading(true);
@@ -50,7 +50,7 @@ const Chat = () => {
             i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
           );
         }
-        return [...prev, { role: "assistant", content: assistantSoFar }];
+        return [...prev, { role: "assistant" as const, content: assistantSoFar, timestamp: Date.now() }];
       });
     };
 
@@ -130,6 +130,11 @@ const Chat = () => {
                   </div>
                 ) : (
                   m.content
+                )}
+                {m.timestamp && (
+                  <span className={`block mt-1 text-[10px] ${m.role === "user" ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
+                    {new Date(m.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  </span>
                 )}
                 {m.role === "assistant" && (
                   <button
