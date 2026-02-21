@@ -61,6 +61,9 @@ const ChatBubble = () => {
         className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95 sm:right-6"
         aria-label="Open chat"
       >
+        {!open && (
+          <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-30" />
+        )}
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
     </>
