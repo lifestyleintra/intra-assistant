@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { useChatHistory } from "@/hooks/use-chat-history";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Send, Copy, Check } from "lucide-react";
+import { ArrowLeft, Send, Copy, Check, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -19,7 +20,7 @@ const QUICK_REPLIES = [
 ];
 
 const Chat = () => {
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const { messages, setMessages, clearHistory } = useChatHistory();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
@@ -83,6 +84,11 @@ const Chat = () => {
         <img src={lifestylesLogo} alt="Lifestyles" className="h-8 w-8" />
         <h1 className="flex-1 text-lg font-semibold text-foreground">Product Q&A</h1>
         <ThemeToggle />
+        {messages.length > 0 && (
+          <Button variant="ghost" size="icon" onClick={clearHistory} title="Clear chat">
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        )}
       </header>
 
       {/* Messages */}
