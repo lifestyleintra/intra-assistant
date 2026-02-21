@@ -34,7 +34,7 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
     const msg = (text ?? input).trim();
     if (!msg || isLoading) return;
 
-    const userMsg: Msg = { role: "user", content: msg };
+    const userMsg: Msg = { role: "user", content: msg, timestamp: Date.now() };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setIsLoading(true);
@@ -49,7 +49,7 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
             i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
           );
         }
-        return [...prev, { role: "assistant", content: assistantSoFar }];
+        return [...prev, { role: "assistant" as const, content: assistantSoFar, timestamp: Date.now() }];
       });
     };
 
@@ -121,6 +121,11 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
                   </div>
                 ) : (
                   m.content
+                )}
+                {m.timestamp && (
+                  <span className={`block mt-1 text-[9px] ${m.role === "user" ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
+                    {new Date(m.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  </span>
                 )}
                 {m.role === "assistant" && (
                   <button
