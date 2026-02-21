@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import type { Msg } from "@/lib/stream";
 
 const STORAGE_KEY = "chat-history";
+const MAX_MESSAGES = 100;
 
 export function useChatHistory() {
   const [messages, setMessages] = useState<Msg[]>(() => {
@@ -15,7 +16,8 @@ export function useChatHistory() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      const trimmed = messages.slice(-MAX_MESSAGES);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
     } catch {
       // storage full or unavailable
     }
