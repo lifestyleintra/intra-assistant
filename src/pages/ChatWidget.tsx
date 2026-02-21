@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Copy, Check } from "lucide-react";
+import { useChatHistory } from "@/hooks/use-chat-history";
+import { Send, Copy, Check, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -18,7 +19,7 @@ interface ChatWidgetProps {
 }
 
 const ChatWidget = ({ embedded }: ChatWidgetProps) => {
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const { messages, setMessages, clearHistory } = useChatHistory();
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
@@ -74,7 +75,7 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
     <div className={`flex flex-col bg-background ${embedded ? "h-full" : "h-screen"}`}>
       {/* Messages */}
       <ScrollArea className="flex-1 px-2 py-2">
-        {messages.length === 0 && (
+        {messages.length === 0 ? (
           <div className="mt-6 space-y-3 text-center">
             <p className="text-xs text-muted-foreground">
               Ask about Lifestyles products
@@ -90,6 +91,15 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
                 </button>
               ))}
             </div>
+          </div>
+        ) : (
+          <div className="flex justify-end px-2 pt-1">
+            <button
+              onClick={clearHistory}
+              className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground"
+            >
+              <Trash2 className="h-2.5 w-2.5" /> Clear
+            </button>
           </div>
         )}
         <div className="mx-auto max-w-lg space-y-3">
