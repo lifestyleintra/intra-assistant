@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { streamFromEdge, type Msg } from "@/lib/stream";
 import ReactMarkdown from "react-markdown";
 import lifestylesLogo from "@/assets/lifestyles-logo.png";
+import { formatDateSeparator, shouldShowDateSeparator } from "@/lib/date-utils";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const QUICK_REPLIES = [
@@ -113,10 +114,15 @@ const Chat = () => {
         )}
         <div className="mx-auto max-w-2xl space-y-4">
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={i}>
+              {shouldShowDateSeparator(messages, i) && m.timestamp && (
+                <div className="flex items-center gap-3 py-3">
+                  <div className="h-px flex-1 bg-border" />
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">{formatDateSeparator(m.timestamp)}</span>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+              )}
+              <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
                 className={`relative max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
                   m.role === "user"
@@ -153,6 +159,7 @@ const Chat = () => {
                   </button>
                 )}
               </div>
+            </div>
             </div>
           ))}
           <div ref={bottomRef} />

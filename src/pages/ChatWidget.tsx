@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { streamFromEdge, type Msg } from "@/lib/stream";
 import ReactMarkdown from "react-markdown";
+import { formatDateSeparator, shouldShowDateSeparator } from "@/lib/date-utils";
 
 const QUICK_REPLIES = [
   "What is Intra juice?",
@@ -104,10 +105,15 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
         )}
         <div className="mx-auto max-w-lg space-y-3">
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={i}>
+              {shouldShowDateSeparator(messages, i) && m.timestamp && (
+                <div className="flex items-center gap-2 py-2">
+                  <div className="h-px flex-1 bg-border" />
+                  <span className="text-[9px] text-muted-foreground whitespace-nowrap">{formatDateSeparator(m.timestamp)}</span>
+                  <div className="h-px flex-1 bg-border" />
+                </div>
+              )}
+              <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
                 className={`relative max-w-[90%] rounded-2xl px-3 py-2 text-xs ${
                   m.role === "user"
@@ -140,6 +146,7 @@ const ChatWidget = ({ embedded }: ChatWidgetProps) => {
                   </button>
                 )}
               </div>
+            </div>
             </div>
           ))}
           <div ref={bottomRef} />
